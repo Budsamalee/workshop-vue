@@ -25,10 +25,10 @@
                     v-model="getEmployee.fname"
                     label="ชื่อจริง"
                     placeholder="ชื่อจริง"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
+                    filled
                   ></v-text-field>
                 </v-col>
                 <v-col cols="6">
@@ -36,10 +36,10 @@
                     v-model="getEmployee.lname"
                     label="นามสกุล"
                     placeholder="นามสกุล"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
+                    filled
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -49,10 +49,10 @@
                     v-model="getEmployee.username"
                     label="Username"
                     placeholder="Username"
-                    filled
-                    rounded
                     dense
                     clearable
+                    outlined
+                    filled
                   ></v-text-field>
                 </v-col>
                 <v-col cols="6">
@@ -60,10 +60,10 @@
                     v-model="getEmployee.email"
                     label="Email"
                     placeholder="Email"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
+                    filled
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -73,10 +73,10 @@
                     v-model="getEmployee.avatar"
                     label="Profile"
                     placeholder="Profile"
-                    filled
-                    rounded
                     dense
                     clearable
+                    outlined
+                    filled
                   ></v-text-field>
                 </v-col>
               </v-row>

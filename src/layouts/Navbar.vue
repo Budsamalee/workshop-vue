@@ -1,7 +1,13 @@
 <template>
   <div class="test">
     <!--<v-app-bar color="blue-grey darken-4" dark app>-->
-    <v-app-bar color="white gray--text" dark app elevation="0">
+    <v-app-bar
+      color="white gray--text"
+      dark
+      app
+      elevation="0"
+      v-scroll="onScroll"
+    >
       <v-btn small color="teal" fab elevation="1">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-btn>

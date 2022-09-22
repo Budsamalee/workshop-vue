@@ -1,9 +1,14 @@
 <template>
   <div>
     <v-container>
+      <v-layout>
+        <v-flex>
+          <p class="text-left">Component B</p>
+        </v-flex>
+      </v-layout>
       <v-card>
-        <v-card-title class="headline teal white--text">
-          Number Counter
+        <v-card-title class="font-weight-bold teal white--text">
+          จำนวนสินค้า
         </v-card-title>
         <v-container>
           <v-layout>
@@ -14,10 +19,10 @@
             </v-flex>
           </v-layout>
           <v-layout justify-center>
-            <v-flex xs10 md9 lg7>
-              <v-btn class="mt-3" block color="primary" @click="numberCounter()"
-                >counter</v-btn
-              >
+            <v-flex xs10 md5 lg7>
+              <v-btn class="mt-3" color="primary" @click="numberCounter()">
+                <v-icon>mdi-plus-circle</v-icon> เพิ่มจำนวน
+              </v-btn>
             </v-flex>
           </v-layout>
         </v-container>

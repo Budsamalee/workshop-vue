@@ -22,16 +22,15 @@
           <v-card class="cardCreate mx-auto mt-2" elevation="5" outlined>
             <!--color="transparent"-->
             <v-card-text>
-              <v-row>
+              <v-row class="mt-2">
                 <v-col cols="6">
                   <v-text-field
                     v-model="dataEmployee.fname"
                     label="ชื่อจริง"
                     placeholder="ชื่อจริง"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>
@@ -40,10 +39,9 @@
                     v-model="dataEmployee.lname"
                     label="นามสกุล"
                     placeholder="นามสกุล"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>
@@ -54,10 +52,9 @@
                     v-model="dataEmployee.username"
                     label="Username"
                     placeholder="Username"
-                    filled
-                    rounded
                     dense
                     clearable
+                    outlined
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>
@@ -66,10 +63,9 @@
                     v-model="dataEmployee.email"
                     label="Email"
                     placeholder="Email"
-                    clearable
-                    filled
-                    rounded
                     dense
+                    clearable
+                    outlined
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>
@@ -80,10 +76,9 @@
                     v-model="dataEmployee.avatar"
                     label="Profile"
                     placeholder="link image"
-                    filled
-                    rounded
                     dense
                     clearable
+                    outlined
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>

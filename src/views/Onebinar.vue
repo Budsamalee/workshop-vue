@@ -1,18 +1,22 @@
 <template>
-  <v-app id="home">
+  <v-app id="HomeView">
     <NavbarOnebinar />
-    <div class="head">
-      <v-row>
-        <v-col cols="5">
-          <div style="position: relative" class="mt-16">
-            <h1 class="text-grey">Hello,</h1>
+    <!-- Sharpe -->
+    <div class="bgFirstSection">
+      <v-row no-gutters></v-row>
+    </div>
+    <!--<div class="head">
+      <v-row class="mt-16">
+        <v-col cols="5" class="mt-16">
+          <div style="position: relative">
+            <h1 class="text-grey mt-16">Welcome Onebinar</h1>
             <h1 class="text-white">Budsamalee Madjarean</h1>
             <span class="text-grey">Web Designer & Developer</span><br />
             <v-btn
               tile
               dark
-              class="yellow--text mt-8"
-              text
+              color="#ffba00"
+              class="mt-8"
               outlined
               variant="outlined"
             >
@@ -34,7 +38,7 @@
             "
             class="mt-16"
           >
-            <v-icon>mdi-account</v-icon>
+            <v-icon class="white--text">mdi-account</v-icon>
           </div>
         </v-col>
         <v-col cols="5">
@@ -43,18 +47,38 @@
           </div>
         </v-col>
       </v-row>
+    </div>-->
+    <!-- Home -->
+    <!--<div>-->
+    <Home />
+    <!--</div>-->
+    <!-- Aboute us -->
+    <div class="about">
+      <Aboute />
     </div>
+    <!-- Protfolio -->
+    <Project />
+    <!-- Footer -->
+    <Footer />
   </v-app>
 </template>
 
 <script>
 import { defineComponent } from "vue"
 import NavbarOnebinar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/NavbarOnebinar.vue"
+import Home from "../components/Home.vue"
+import Aboute from "../components/Aboute.vue"
+import Project from "../components/Project.vue"
+import Footer from "../layouts/Footer.vue"
 
 export default defineComponent({
   name: "HomeView",
   components: {
     NavbarOnebinar,
+    Home,
+    Aboute,
+    Project,
+    Footer,
   },
   data() {
     return {
@@ -85,13 +109,28 @@ export default defineComponent({
 })
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Prompt:300,600&display=swap&subset=latin-ext,thai");
+#HomeView {
+  /* font-family: 'Prompt', sans-serif; */
+  /* font-family: 'Sarabun', Helvetica, Arial, sans-serif; */
+  font-family: "Prompt", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  /* background-image: linear-gradient(red, yellow); */
+  background-color: #f3f3f4;
+  /*background-image: linear-gradient(315deg, #e4eee9 0%, #93a5ce 74%);*/
+}
 .head {
   position: relative;
   text-align: center;
   padding: 12px;
   margin-bottom: 6px;
-  transform: translate(0px, -60px);
-  height: 400px;
+  transform: translate(0px, -120px);
+  height: 500px;
   width: 100%;
   color: white;
 }
@@ -115,43 +154,17 @@ export default defineComponent({
   background: black;
   transform: skew(0deg, -8deg);
 }
-.egg {
-  display: block;
-  margin-left: 100px;
-  margin-top: 50px;
-  width: 356px;
-  height: 300px;
-  background-color: #fbdf7e;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+.about {
+  background-color: #bbdeff;
 }
-.first {
-  width: 100%;
-  height: 280px;
+.bgFirstSection {
+  position: relative;
+  background-image: url("../assets/5068978.jpg");
   text-align: center;
-  padding: 2rem 2rem;
-}
-.child {
-  display: inline-block;
-  padding: 2rem 1rem;
-  vertical-align: middle;
-  text-align: center;
-  margin-right: 8px;
-}
-.imgHover {
-  padding: 0 200px;
-}
-.pre {
+  transform: translate(0px, -80px);
+  height: 400px;
   width: 100%;
-  height: 380px;
-  text-align: center;
-  padding: 0 200px;
-  background-color: #f5f5f5;
-}
-.hire {
-  width: 100%;
-  height: 200px;
-  padding: 0 200px;
-  background-color: #e9e9e9;
-  margin-top: -24px;
+  color: white;
+  background-size: cover;
 }
 </style>

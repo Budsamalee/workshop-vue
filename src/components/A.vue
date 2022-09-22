@@ -1,8 +1,15 @@
 <template>
   <div>
     <v-container>
+      <v-layout>
+        <v-flex>
+          <p class="text-center">Component A</p>
+        </v-flex>
+      </v-layout>
       <v-card>
-        <v-card-title class="headline teal white--text"> PRODUCT </v-card-title>
+        <v-card-title class="font-weight-bold teal white--text">
+          รายละเอียดสินค้า
+        </v-card-title>
         <v-container>
           <v-layout>
             <v-flex lg="4" xs="6" class="mt-2">
@@ -16,7 +23,7 @@
           </v-layout>
           <v-layout>
             <v-flex lg="4" xs="6">
-              <p class="b float-left">วันผลิต : {{ product.mfd }}</p>
+              <p class="b float-left">วันผลิต : {{ product.date }}</p>
             </v-flex>
           </v-layout>
           <v-layout>

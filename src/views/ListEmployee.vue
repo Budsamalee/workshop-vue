@@ -20,7 +20,7 @@
                 color="warning"
                 class="float-right mr-3"
                 @click="logDataMap()"
-                >logDataMap</v-btn
+                >GET PROFILE JSON</v-btn
               >
             </v-col>
           </v-row>

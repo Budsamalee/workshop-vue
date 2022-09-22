@@ -1,9 +1,14 @@
 <template>
   <div>
     <v-container>
+      <v-layout>
+        <v-flex>
+          <p class="text-right">Component C</p>
+        </v-flex>
+      </v-layout>
       <v-card>
-        <v-card-title class="headline teal white--text">
-          From product
+        <v-card-title class="font-weight-bold teal white--text">
+          กรอกรายละเอียดสินค้า
         </v-card-title>
         <v-container>
           <v-layout>
@@ -30,14 +35,49 @@
           </v-layout>
           <v-layout>
             <v-flex xs="6" ma-2>
-              <v-text-field
+              <!--<v-text-field
                 v-model="formData.mfd"
                 label="วันผลิต"
                 placeholder="กรุณากรอกวันผลิด"
                 outlined
                 dense
                 >วันผลิต</v-text-field
+              >-->
+              <v-menu
+                ref="menu"
+                v-model="formData.mfd"
+                :close-on-content-click="false"
+                :return-value.sync="formData.date"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
               >
+                <!--prepend-icon="mdi-calendar"-->
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="formData.date"
+                    label="Picker in menu"
+                    readonly
+                    outlined
+                    dense
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="formData.date" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menu = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.menu.save(formData.date)"
+                  >
+                    OK
+                  </v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-flex>
             <v-flex xs="6" ma-2>
               <v-text-field
@@ -51,9 +91,14 @@
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
-          <v-btn class="mt-3" color="success" block @click="save()">
-            Save
-          </v-btn>
+          <div class="text-right">
+            <v-btn class="mt-2 mr-2" color="error" @click="cancelForm()">
+              Cancel
+            </v-btn>
+            <v-btn class="mt-2 mr-2" color="success" @click="save()">
+              Save
+            </v-btn>
+          </div>
         </v-container>
       </v-card>
     </v-container>
@@ -68,8 +113,11 @@ export default {
       formData: {
         product: "",
         owner: "",
-        mfd: "",
+        mfd: false,
         description: "",
+        date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10),
       },
     }
   },
@@ -81,10 +129,25 @@ export default {
         owner: this.formData.owner,
         mfd: this.formData.mfd,
         description: this.formData.description,
+        date: this.formData.date,
       }
+      console.log("--->", payload)
       //เรียก fn ที่เรียกหน้า js
       //  this.SET_DATA_USER(payload)
       this.$store.dispatch("SET_DATA_PRODUCT", payload)
+    },
+    cancelForm() {
+      console.log("cancelForm")
+      this.formData = {
+        product: "",
+        owner: "",
+        mfd: false,
+        description: "",
+        date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10),
+      }
+      console.log("clear ->", this.formData)
     },
   },
 }
