@@ -168,8 +168,9 @@ export default {
         lname: data.lname,
         email: data.email,
         username: data.username,
+        password: "",
       }
-      if (data.avatar == "") {
+      if (data.avatar == "" || data.avatar == null) {
         console.log("ว่าง")
         payload["avatar"] =
           "https://altrolaw.com/wp-content/uploads/2021/07/default-profile-picture-png-1-Transparent-Images.png"
@@ -179,7 +180,7 @@ export default {
       }
       console.log("payload ->", payload)
       this.axios
-        .post("https://www.mecallapi.com/api/users/create", payload)
+        .post("https://melivecode.com/api/users/create", payload)
         .then((res) => {
           console.log("RES ->", res.data.user)
           this.$router.push("/listEmployee")

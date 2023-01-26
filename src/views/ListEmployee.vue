@@ -1,6 +1,5 @@
 <template>
   <div class="mt-5">
-    <!--<span class="mt-5 font2">Employee</span>-->
     <Navbar></Navbar>
     <v-container>
       <v-layout row wrap fill-height align-center justify-center>
@@ -107,13 +106,12 @@
         </v-container>
       </v-card>
     </v-container>
-    <!--<Footer :data="Id"></Footer>-->
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapState } from "vuex"
 import swal from "sweetalert"
 import Navbar from "../layouts/Navbar.vue"
 import Footer from "../layouts/Footer.vue"
@@ -147,21 +145,20 @@ export default {
     }
   },
   computed: {
-    //...mapState({
-    //  profile: (state) => state.profile,
-    //}),
-    ...mapGetters(["getProfile"]),
+    ...mapGetters(["data_profile"]),
     userProfile: {
       get() {
-        console.log("GETPRO ->", this.getProfile)
-        return this.getProfile
+        return this.data_profile
       },
     },
     // ถ้าต้องการ log data ที่ mapGetters ให้ log ในคัวแปรได้เลยจะไม่สามารถ log ใน created, mounted ได้เพราะมันจะ reload เข้ามาทำ created ก่อน computed
+    ...mapState({
+      profile: (state) => state.profile,
+    }),
   },
   mounted() {
-    //this.token = localStorage.getItem("userToken")
     this.getCustomers()
+    //this.token = localStorage.getItem("userToken")
     //this.getProfile()
   },
   methods: {
@@ -169,11 +166,9 @@ export default {
 
     logDataMap() {
       this.show = true
-      console.log("DATA >>", this.getProfile)
     },
     getCustomers() {
-      //console.log("----- WELL COME -----")
-      this.axios.get("https://www.mecallapi.com/api/users").then((res) => {
+      this.axios.get("https://www.melivecode.com/api/users").then((res) => {
         this.customers = res.data
         var index = 0
         for (var item of this.customers) {
@@ -234,24 +229,24 @@ export default {
         }
       })
     },
-    //getProfile() {
-    //  if (this.token === null || this.token === "") {
-    //    this.$router.push("/")
-    //  }
-    //  //this.getUserLogin()
-    //},
-    //getUserLogin() {
-    //  console.log("Token ->", this.token)
-    //  this.axios
-    //    .get("https://www.melivecode.com/api/auth/user", {
-    //      headers: { Authorization: `Basic ${this.token}` },
-    //    })
-    //    .then((res) => {
-    //      this.userLogin = res.data.user
-    //      this.$store.dispatch("SET_PROFILE", this.userLogin)
-    //      //console.log("---->", this.userLogin)
-    //    })
-    //},
+    getProfile() {
+      if (this.token === null || this.token === "") {
+        this.$router.push("/")
+      }
+      //this.getUserLogin()
+    },
+    getUserLogin() {
+      console.log("Token ->", this.token)
+      this.axios
+        .get("https://www.melivecode.com/api/auth/user", {
+          headers: { Authorization: `Basic ${this.token}` },
+        })
+        .then((res) => {
+          this.userLogin = res.data.user
+          this.$store.dispatch("SET_PROFILE", this.userLogin)
+          //console.log("---->", this.userLogin)
+        })
+    },
   },
 }
 </script>

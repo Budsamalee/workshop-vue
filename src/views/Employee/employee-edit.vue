@@ -202,7 +202,7 @@ export default {
       }
       console.log(payload)
       this.axios
-        .put("https://www.mecallapi.com/api/users/update", payload)
+        .put("https://www.melivecode.com/api/users/update", payload)
         .then((res) => {
           console.log("EDIT ->", res)
 

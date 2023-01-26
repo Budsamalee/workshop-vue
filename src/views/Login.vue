@@ -135,7 +135,7 @@
 
 <script>
 //import { mapActions } from "vuex"
-import swal from "sweetalert"
+//import swal from "sweetalert"
 import Register from "../components/Register.vue"
 
 export default {
@@ -204,32 +204,32 @@ export default {
       //this.postLogin()
       //this.postLogin_2()
     },
-    postLogin_2() {
-      var payload = {
-        username: this.userLogin.username,
-        password: this.userLogin.password,
-      }
-      console.log("PAY ->", payload)
-      this.axios
-        .post(`${process.env.VUE_APP_API_TEST}/auth/login`, payload)
-        .then((res) => {
-          //console.log("RES LOGIN", res)
-          this.snackbar = true
-          this.loader = false
-          localStorage.setItem("userToken", res.data.data.access_token)
-          this.$store.dispatch("SET_LOGIN_CHECKING")
-          this.$router.push({ path: "/listEmployee" })
-        })
-        .catch((err) => {
-          console.log(err)
-          this.loader = false
-          swal({
-            title: "Password ไม่ถูกต้อง",
-            icon: "warning",
-          })
-          this.loading = false
-        })
-    },
+    //postLogin_2() {
+    //  var payload = {
+    //    username: this.userLogin.username,
+    //    password: this.userLogin.password,
+    //  }
+    //  console.log("PAY ->", payload)
+    //  this.axios
+    //    .post(`${process.env.VUE_APP_API_TEST}/auth/login`, payload)
+    //    .then((res) => {
+    //      //console.log("RES LOGIN", res)
+    //      this.snackbar = true
+    //      this.loader = false
+    //      localStorage.setItem("userToken", res.data.data.access_token)
+    //      this.$store.dispatch("SET_LOGIN_CHECKING")
+    //      this.$router.push({ path: "/listEmployee" })
+    //    })
+    //    .catch((err) => {
+    //      console.log(err)
+    //      this.loader = false
+    //      swal({
+    //        title: "Password ไม่ถูกต้อง",
+    //        icon: "warning",
+    //      })
+    //      this.loading = false
+    //    })
+    //},
     postLogin() {
       //console.log(this.userLogin)
       var payload = {

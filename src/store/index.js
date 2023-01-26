@@ -12,6 +12,8 @@ const state = {
   name: "World",
   dataUser: {},
   profile: {},
+  getProfile: null,
+  dataProfile: {},
   data_profile: {},
   dataProduct: {},
   currentCounter: 0,
@@ -87,41 +89,41 @@ const actions = {
     const token = localStorage.getItem("userToken")
     console.log(token)
     // ของอาจารย์ใน youtube
-    //if (token !== null) {
-    //  axios
-    //    .get("https://www.melivecode.com/api/auth/user", {
-    //      headers: {
-    //        Authorization: `Basic ${token}`,
-    //      },
-    //    })
-    //    .then((res) => {
-    //      //console.log("RES=>", res.data)
-    //      if (res.data.status == "ok") {
-    //        // no 4
-    //        commit("SET_LOGIN_SUCCESS", res.data)
-    //      }
-    //    })
-    //}
-
-    // ของ P'Reef
     if (token !== null) {
       axios
-        .get(`${process.env.VUE_APP_API_TEST}/auth/user`, {
+        .get("https://www.melivecode.com/api/auth/user", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Basic ${token}`,
           },
         })
         .then((res) => {
-          //console.log("RES=>", res.data.data)
-          let status = res.data.code
-          let data = res.data.data
-          //console.log("Data User :", data)
-          if (status == 200) {
+          //console.log("RES=>", res.data)
+          if (res.data.status == "ok") {
             // no 4
-            commit("SET_LOGIN_SUCCESS", data)
+            commit("SET_LOGIN_SUCCESS", res.data)
           }
         })
     }
+
+    // ของ P'Reef
+    //if (token !== null) {
+    //  axios
+    //    .get(`${process.env.VUE_APP_API_TEST}/auth/user`, {
+    //      headers: {
+    //        Authorization: `Bearer ${token}`,
+    //      },
+    //    })
+    //    .then((res) => {
+    //      //console.log("RES=>", res.data.data)
+    //      let status = res.data.code
+    //      let data = res.data.data
+    //      //console.log("Data User :", data)
+    //      if (status == 200) {
+    //        // no 4
+    //        commit("SET_LOGIN_SUCCESS", data)
+    //      }
+    //    })
+    //}
   },
   // no 4
   SET_DATA_PRODUCT({ commit }, payload) {
@@ -156,7 +158,8 @@ const actions = {
 
 const getters = {
   profile: (state) => state.profile,
-  getProfile: (state) => state.data_profile,
+  //getProfile: (state) => state.data_profile,
+  data_profile: (state) => state.data_profile,
   getProduct: (state) => state.dataProduct,
   currentCounter: (state) => state.currentCounter,
   dataList: (state) => state.dataList,
