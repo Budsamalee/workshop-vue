@@ -7,13 +7,72 @@
     :color="!isScrolling ? 'transparent' : 'white black--text'"
     class="px-12 white--text"
   >
-    <div @click="$router.push('/listEmployee')" class="wait">
-      <v-icon color="#ffba00" left class="mr-2">mdi-account</v-icon>
-      OneBinar
-    </div>
-    <v-spacer></v-spacer>
-    <!-- flex ทำให้ต่อกัน -->
-    <v-list
+    <v-container grid-list-xs>
+      <v-layout row wrap align-center justify-center>
+        <v-layout row justify-center align-center>
+          <v-flex xs10 lg10 md10 sm10 class="text-left">
+            <div @click="$router.push('/listEmployee')" class="wait">
+              <v-icon color="#ffba00" left class="mr-2">mdi-account</v-icon>
+              OneBinar
+            </div>
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap justify-center align-center>
+          <v-flex
+            xs12
+            lg11
+            md12
+            offset-y
+            bottom
+            open-on-hover
+            transition="slide-y-transition"
+            class="toolbarDesktop text-right white--text"
+          >
+            <v-row justify="center" class="mr-3" v-if="isBtnWhite">
+              <v-menu bottom>
+                <template v-slot:activator="{ on }">
+                  <div v-for="menu in menus" :key="menu.title">
+                    <v-btn
+                      v-on="on"
+                      text
+                      class="white--text"
+                      @click="windowRoute(menu.title)"
+                    >
+                      {{ menu.title }}
+                    </v-btn>
+                  </div>
+                </template>
+              </v-menu>
+              <v-btn text class="white--text">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+              <v-btn color="#ffba00" class="white--text"> GET STARTED </v-btn>
+            </v-row>
+            <v-row justify="center" class="mr-3" v-if="isBtnBlack">
+              <v-menu bottom>
+                <template v-slot:activator="{ on }">
+                  <div v-for="menu in menus" :key="menu.title" :to="menu.route">
+                    <v-btn
+                      v-on="on"
+                      text
+                      class="black--text"
+                      @click="windowRoute(menu.title)"
+                    >
+                      {{ menu.title }}
+                    </v-btn>
+                  </div>
+                </template>
+              </v-menu>
+              <v-btn text class="black--text">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+              <v-btn outlined color="#ffba00"> GET STARTED </v-btn>
+            </v-row>
+          </v-flex>
+        </v-layout>
+      </v-layout>
+    </v-container>
+    <!--<v-list
       class="d-flex align-center"
       :color="!isScrolling ? 'transparent' : 'white black--text'"
       v-if="isBtnWhite"
@@ -52,12 +111,17 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
       <v-btn outlined color="warning" class="white--text"> GET STARTED </v-btn>
-    </v-list>
+    </v-list>-->
   </v-app-bar>
 </template>
 
 <script>
+//import Contect from "../components/Contect.vue"
+
 export default {
+  //components: {
+  //  Contect,
+  //},
   data() {
     return {
       isLogoWhite: true,
@@ -69,16 +133,25 @@ export default {
       menu: null,
       home: true,
       menus: [
-        { title: "Home", router: "home" },
-        { title: "Aboute us", router: "aboute-us" },
-        { title: "Protfolio", router: "protfolio" },
-        { title: "Project", router: "project" },
-        { title: "Gallery", router: "gallery" },
-        { title: "Contact", router: "contact" },
+        { title: "Home", route: "/listEmployee" },
+        { title: "Aboute vue" },
+        { title: "Project" },
+        { title: "Contact" },
       ],
     }
   },
   methods: {
+    windowRoute(name) {
+      if (name === "Home") {
+        window.location.href = "#home"
+      } else if (name === "Aboute vue") {
+        window.location.href = "#about"
+      } else if (name === "Contact") {
+        window.location.href = "#contect"
+      } else {
+        window.location.href = "#project"
+      }
+    },
     onScroll() {
       const offset = window.pageYOffset
       this.isScrolling = offset > 80

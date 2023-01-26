@@ -1,7 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import pathify, { make } from "vuex-pathify"
-import * as auth from "./auth"
+//import pathify, { make } from "vuex-pathify"
 import axios from "axios"
 
 // store
@@ -16,10 +15,14 @@ const state = {
   data_profile: {},
   dataProduct: {},
   currentCounter: 0,
+  dataList: {},
+  employById: "",
+  listEditCompany: {},
+  listEditAdmin: {},
 }
 
 const mutations = {
-  ...make.mutations(state),
+  //...make.mutations(state),
   // no 1
   //setDetailUser(state, payload) {
   //  state.dataUser = payload
@@ -48,6 +51,24 @@ const mutations = {
   SET_COUNTER_SUCCESS(state) {
     state.currentCounter++
   },
+  // no 7
+  SET_PRODUCT_DETAIL(state, data) {
+    console.log("ก่อน ->", state)
+    console.log("หลัง ->", data)
+    state.dataList = data
+    console.log("Data Product ->", state.dataProduct)
+  },
+  SET_EMPLOYEE_BIID_SUCCESS(state, data) {
+    state.employById = data
+    console.log("STATE =====>", state.employById)
+  },
+  SET_COMPANY_EDIT_SUCCESS(state, data) {
+    state.listEditCompany = data
+    console.log("STATE LIST ->", state.listEditCompany)
+  },
+  SET_ADMIN_EDIT_SUCCESS(state, data) {
+    state.listEditAdmin = data
+  },
 }
 const actions = {
   // no 1
@@ -62,20 +83,42 @@ const actions = {
   //},
   // no 3
   SET_LOGIN_CHECKING({ commit }) {
-    console.log("Token ->", localStorage.getItem("userToken"))
+    //console.log("Token ->", localStorage.getItem("userToken"))
     const token = localStorage.getItem("userToken")
+    console.log(token)
+    // ของอาจารย์ใน youtube
+    //if (token !== null) {
+    //  axios
+    //    .get("https://www.melivecode.com/api/auth/user", {
+    //      headers: {
+    //        Authorization: `Basic ${token}`,
+    //      },
+    //    })
+    //    .then((res) => {
+    //      //console.log("RES=>", res.data)
+    //      if (res.data.status == "ok") {
+    //        // no 4
+    //        commit("SET_LOGIN_SUCCESS", res.data)
+    //      }
+    //    })
+    //}
+
+    // ของ P'Reef
     if (token !== null) {
       axios
-        .get("https://www.melivecode.com/api/auth/user", {
+        .get(`${process.env.VUE_APP_API_TEST}/auth/user`, {
           headers: {
-            Authorization: `Basic ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          //console.log("RES=>", res.data)
-          if (res.data.status == "ok") {
+          //console.log("RES=>", res.data.data)
+          let status = res.data.code
+          let data = res.data.data
+          //console.log("Data User :", data)
+          if (status == 200) {
             // no 4
-            commit("SET_LOGIN_SUCCESS", res.data)
+            commit("SET_LOGIN_SUCCESS", data)
           }
         })
     }
@@ -90,6 +133,25 @@ const actions = {
   SET_COUNTER_PRODUCT({ commit }) {
     commit("SET_COUNTER_SUCCESS")
   },
+  // no 6
+  SET_PRODUCT({ commit }, data) {
+    // no 7
+    commit("SET_PRODUCT_DETAIL", data)
+  },
+  SET_EMPLOYEE_BYID({ commit }, data) {
+    console.log("Stor ->", data)
+    commit("SET_EMPLOYEE_BIID_SUCCESS", data)
+  },
+  // company edit
+  SET_EDIT_COMPANY({ commit }, data) {
+    console.log("EDIT DATA ->", data)
+    commit("SET_COMPANY_EDIT_SUCCESS", data)
+  },
+  //Admin edit
+  SET_EDIT_ADMIN({ commit }, data) {
+    console.log("EDIT ADMIN", data)
+    commit("SET_ADMIN_EDIT_SUCCESS", data)
+  },
 }
 
 const getters = {
@@ -97,15 +159,19 @@ const getters = {
   getProfile: (state) => state.data_profile,
   getProduct: (state) => state.dataProduct,
   currentCounter: (state) => state.currentCounter,
+  dataList: (state) => state.dataList,
+  employById: (state) => state.employById,
+  listEditCompany: (state) => state.listEditCompany,
+  listEditAdmin: (state) => state.listEditAdmin,
 }
 
 export default new Vuex.Store({
   // use the plugin
-  plugins: [pathify.plugin],
+  //plugins: [pathify.plugin],
 
   // properties
+  namespaced: true,
   state,
-  auth,
   getters,
   actions,
   mutations,

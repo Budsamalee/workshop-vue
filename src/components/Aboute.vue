@@ -1,8 +1,8 @@
 <template>
-  <v-container class="pt-15">
-    <v-row>
-      <v-col lg="6">
-        <div class="center">
+  <v-container id="about">
+    <v-row class="mt-3">
+      <v-col xs="4" md="6" lg="6" sm="6" class="align-item">
+        <div class="mr-4 ma-0" data-aos="fade-up">
           <img
             width="100%"
             src="../assets/Screen_Shot_2565-09-22_at_12.01.42-removebg-preview.png"
@@ -10,7 +10,7 @@
           />
         </div>
       </v-col>
-      <v-col lg="6">
+      <v-col xs="7" md="6" lg="6" sm="6" class="align-item">
         <h1 class="intro-text text-left mb-2">Aboute Vue</h1>
         <v-divider></v-divider>
         <br />

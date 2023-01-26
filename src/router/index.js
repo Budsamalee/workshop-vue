@@ -8,6 +8,8 @@ import Projects from "../views/Projects.vue"
 import Login from "../views/Login.vue"
 import Onebinar from "../views/Onebinar.vue"
 import Vuex from "../views/Vuex.vue"
+import Company from "../views/Company.vue"
+import Media from "../views/Media.vue"
 //import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -39,7 +41,12 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/manage/editemployee/:id",
+    path: "/company",
+    name: "Company",
+    component: Company,
+  },
+  {
+    path: "/manage/editemployee",
     name: "Employee_edit",
     component: Employee_edit,
   },
@@ -52,6 +59,11 @@ const routes = [
     path: "/vuex",
     name: "Vuex",
     component: Vuex,
+  },
+  {
+    path: "/media",
+    name: "Media",
+    component: Media,
   },
   //{
   //  path: '/about',

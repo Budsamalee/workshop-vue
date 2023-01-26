@@ -13,22 +13,22 @@
         <v-container>
           <v-layout>
             <v-flex lg="4" xs="6" class="mt-2">
-              <p class="b float-left">ชื่อสินค้า : {{ product.product }}</p>
+              <p class="b float-left">ชื่อสินค้า : {{ getList.product }}</p>
             </v-flex>
           </v-layout>
           <v-layout>
             <v-flex lg="4" xs="6">
-              <p class="b float-left">ชื่อเจ้าของ : {{ product.owner }}</p>
+              <p class="b float-left">ชื่อเจ้าของ : {{ getList.owner }}</p>
             </v-flex>
           </v-layout>
           <v-layout>
             <v-flex lg="4" xs="6">
-              <p class="b float-left">วันผลิต : {{ product.date }}</p>
+              <p class="b float-left">วันผลิต : {{ getList.date }}</p>
             </v-flex>
           </v-layout>
           <v-layout>
             <v-flex lg="4" xs="6">
-              <p class="b float-left">รายละเอียด : {{ product.description }}</p>
+              <p class="b float-left">รายละเอียด : {{ getList.description }}</p>
             </v-flex>
           </v-layout>
           <v-layout>
@@ -53,7 +53,7 @@ export default {
   computed: {
     //...mapState({ dataProduct: (store) => store.index.dataProduct }),
     //...mapState({ dataProduct: (store) => store.dataProduct }),
-    ...mapGetters(["getProduct", "currentCounter"]),
+    ...mapGetters(["getProduct", "currentCounter", "dataList"]),
     product: {
       get() {
         console.log("Product ->", this.getProduct)
@@ -64,6 +64,12 @@ export default {
       get() {
         console.log("Current ->", this.currentCounter)
         return this.currentCounter
+      },
+    },
+    getList: {
+      get() {
+        console.log("dataList ->", this.dataList)
+        return this.dataList
       },
     },
   },

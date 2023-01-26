@@ -95,7 +95,7 @@
             <v-btn class="mt-2 mr-2" color="error" @click="cancelForm()">
               Cancel
             </v-btn>
-            <v-btn class="mt-2 mr-2" color="success" @click="save()">
+            <v-btn class="mt-2 mr-2" color="success" @click="save(formData)">
               Save
             </v-btn>
           </div>
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-//import { mapActions } from "vuex"
+import { mapActions } from "vuex"
 export default {
   data() {
     return {
@@ -122,19 +122,30 @@ export default {
     }
   },
   methods: {
-    //...mapActions({ SET_DATA_USER: "index" }),
-    save() {
+    ...mapActions(["SET_PRODUCT"], "index/dataList"),
+    save(data) {
+      //console.log("DATA =>", data)
       let payload = {
-        product: this.formData.product,
-        owner: this.formData.owner,
-        mfd: this.formData.mfd,
-        description: this.formData.description,
-        date: this.formData.date,
+        product: data.product,
+        owner: data.owner,
+        mfd: data.mfd,
+        description: data.description,
+        date: data.date,
       }
-      console.log("--->", payload)
+      console.log("PAYLOAD =>", payload)
+      this.SET_PRODUCT(payload)
+
+      //let payload = {
+      //  product: this.formData.product,
+      //  owner: this.formData.owner,
+      //  mfd: this.formData.mfd,
+      //  description: this.formData.description,
+      //  date: this.formData.date,
+      //}
+      //console.log("--->", payload)
       //เรียก fn ที่เรียกหน้า js
       //  this.SET_DATA_USER(payload)
-      this.$store.dispatch("SET_DATA_PRODUCT", payload)
+      //this.$store.dispatch("SET_DATA_PRODUCT", payload)
     },
     cancelForm() {
       console.log("cancelForm")

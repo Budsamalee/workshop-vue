@@ -1,13 +1,7 @@
 <template>
   <div class="test">
     <!--<v-app-bar color="blue-grey darken-4" dark app>-->
-    <v-app-bar
-      color="white gray--text"
-      dark
-      app
-      elevation="0"
-      v-scroll="onScroll"
-    >
+    <v-app-bar color="white gray--text" dark app elevation="0">
       <v-btn small color="teal" fab elevation="1">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-btn>
@@ -75,6 +69,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import Popup from "../components/Popup.vue"
 export default {
   components: {
@@ -94,6 +89,8 @@ export default {
         { icon: "mdi-folder", text: "My Project", route: "/projects" },
         { icon: "mdi-cube-outline", text: "Onebinar", route: "/onebinar" },
         { icon: "mdi-tag", text: "Vuex", route: "/vuex" },
+        { icon: "mdi-lan", text: "Company", route: "/company" },
+        { icon: "mdi-image", text: "Media", route: "/media" },
       ],
       lists: [
         { text: "แดชบอร์ด", icon: "mdi-widgets", route: "/" },
@@ -105,6 +102,15 @@ export default {
       avatar: "https://cdn-icons-png.flaticon.com/512/194/194938.png",
       keep: {},
     }
+  },
+  computed: {
+    ...mapGetters(["getProfile"]),
+    listProfile: {
+      get() {
+        console.log("Product ->", this.getProfile)
+        return this.getProfile
+      },
+    },
   },
   methods: {
     gotoPage() {

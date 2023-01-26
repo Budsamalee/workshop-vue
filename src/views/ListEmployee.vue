@@ -2,29 +2,40 @@
   <div class="mt-5">
     <!--<span class="mt-5 font2">Employee</span>-->
     <Navbar></Navbar>
-    <v-container grid-list-md>
-      <v-card color="white">
+    <v-container>
+      <v-layout row wrap fill-height align-center justify-center>
+        <v-flex xs6 lg6>
+          <v-card class="elevation-0" outlined color="transparent">
+            <v-card-title>
+              <v-avatar color="grey">
+                <v-icon dark>mdi-account</v-icon>
+              </v-avatar>
+              <b>&nbsp;ข้อมูลพนักงาน</b>
+            </v-card-title>
+          </v-card>
+        </v-flex>
+        <v-flex xs6 lg6>
+          <div>
+            <v-btn
+              color="success darken-1"
+              class="float-right ma-3"
+              @click="createEmployee()"
+            >
+              <v-icon center class="mr-1"> mdi-plus </v-icon>
+              สร้าง
+            </v-btn>
+            <v-btn
+              color="warning"
+              class="float-right ma-3"
+              @click="logDataMap()"
+              >GET PROFILE JSON</v-btn
+            >
+          </div>
+        </v-flex>
+      </v-layout>
+      <pre v-if="show == true">{{ userProfile }}</pre>
+      <v-card color="white" class="mt-2">
         <v-container>
-          <v-row class="mt-3">
-            <!--<v-col cols="12"> Store -> {{ $store.getters.token }} </v-col>-->
-            <v-col cols="12">
-              <v-btn
-                color="success darken-1"
-                class="float-right"
-                @click="createEmployee()"
-              >
-                <v-icon center class="mr-1"> mdi-plus </v-icon>
-                สร้าง
-              </v-btn>
-              <v-btn
-                color="warning"
-                class="float-right mr-3"
-                @click="logDataMap()"
-                >GET PROFILE JSON</v-btn
-              >
-            </v-col>
-          </v-row>
-          <pre v-if="show == true">{{ userProfile }}</pre>
           <!--<div class="th-stlye table-stlye">-->
           <div>
             <v-data-table
@@ -38,15 +49,15 @@
                 </v-avatar>
               </template>
               <template v-slot:item.action="{ item }">
+                <!--<FormDetail :data="item" />-->
                 <v-btn
                   color="warning darken-1"
                   class="mr-2"
                   fab
                   small
-                  @click="updateEmployee(item.id)"
+                  @click="updateEmployee(item)"
                 >
                   <v-icon small center class="ma-1"> mdi-pencil </v-icon>
-                  <!--แก้ไข-->
                 </v-btn>
                 <v-btn
                   color="primary darken-1"
@@ -55,7 +66,6 @@
                   @click="deleteEmployee(item.id)"
                 >
                   <v-icon small center class="ma-1"> mdi-delete </v-icon>
-                  <!--ลบ-->
                 </v-btn>
               </template>
               <!--<template v-slot:header="{ props: { headers } }">
@@ -97,6 +107,7 @@
         </v-container>
       </v-card>
     </v-container>
+    <!--<Footer :data="Id"></Footer>-->
     <Footer></Footer>
   </div>
 </template>
@@ -106,7 +117,8 @@ import { mapGetters } from "vuex"
 import swal from "sweetalert"
 import Navbar from "../layouts/Navbar.vue"
 import Footer from "../layouts/Footer.vue"
-//import { sync } from "vue-pathify"
+import { mapActions } from "vuex"
+//import FormDetail from "../components/FormDetail.vue"
 
 export default {
   name: "app",
@@ -153,9 +165,11 @@ export default {
     //this.getProfile()
   },
   methods: {
+    ...mapActions(["SET_EMPLOYEE_BYID"], "index/employById"),
+
     logDataMap() {
       this.show = true
-      console.log("DATA >>", this.userProfile)
+      console.log("DATA >>", this.getProfile)
     },
     getCustomers() {
       //console.log("----- WELL COME -----")
@@ -187,9 +201,11 @@ export default {
       //console.log("---- Create Employee -----")
       this.$router.push({ path: "/manage/createemployee" })
     },
-    updateEmployee(id) {
-      console.log("id ->", id)
-      this.$router.push({ path: "/manage/editemployee/" + id })
+    updateEmployee(item) {
+      //console.log("item ---->", item)
+      this.id = item
+      this.SET_EMPLOYEE_BYID(item)
+      this.$router.push({ path: "/manage/editemployee" })
     },
     deleteEmployee(id) {
       swal({

@@ -2,7 +2,7 @@
   <v-app id="HomeView">
     <NavbarOnebinar />
     <!-- Sharpe -->
-    <div class="bgFirstSection">
+    <div class="bgFirstSection ma-0">
       <v-row no-gutters></v-row>
     </div>
     <!--<div class="head">
@@ -58,8 +58,14 @@
     </div>
     <!-- Protfolio -->
     <Project />
+    <!-- Contect -->
+    <div class="content">
+      <Contect />
+    </div>
     <!-- Footer -->
-    <Footer />
+    <div color="about">
+      <FooterOneBinar />
+    </div>
   </v-app>
 </template>
 
@@ -69,6 +75,8 @@ import NavbarOnebinar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/Navba
 import Home from "../components/Home.vue"
 import Aboute from "../components/Aboute.vue"
 import Project from "../components/Project.vue"
+import Contect from "../components/Contect.vue"
+import FooterOneBinar from "../layouts/FooterOneBinar.vue"
 import Footer from "../layouts/Footer.vue"
 
 export default defineComponent({
@@ -79,6 +87,8 @@ export default defineComponent({
     Aboute,
     Project,
     Footer,
+    Contect,
+    FooterOneBinar,
   },
   data() {
     return {
@@ -160,11 +170,15 @@ export default defineComponent({
 .bgFirstSection {
   position: relative;
   background-image: url("../assets/5068978.jpg");
+  background-position: center;
   text-align: center;
-  transform: translate(0px, -80px);
+  transform: translate(0px, -65px);
   height: 400px;
   width: 100%;
-  color: white;
+  /*color: white;*/
   background-size: cover;
+}
+.content {
+  background-color: #cfd8dc;
 }
 </style>

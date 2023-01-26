@@ -1,8 +1,12 @@
 <template>
-  <v-container>
+  <v-container id="home">
     <v-row>
-      <v-col lg="6">
-        <h1 class="intro-text text-left mb-2">Welcome to Vue</h1>
+      <v-col xs="7" md="6" lg="6" sm="6" class="align-item">
+        <h1 class="intro-text text-left mt-16">
+          <b> Welcome to Vue </b>
+        </h1>
+        <v-divider></v-divider>
+        <br />
         <p class="text-left discription">
           Vue อ่านว่า “วิว” เหมือนกับคำว่า view เลย โดยเป็น “progressive
           framework” สำหรับสร้าง user interface ซึ่ง progressive ก็คือการที่
@@ -13,22 +17,23 @@
           Applications (SPA) หรือเว็บที่ไม่ต้องเปลี่ยนหน้าบ่อยๆนั่นเอง
         </p>
         <br />
-        <div class="text-left">
-          <v-btn color="success" class="white--text ma-2" rounded>
+        <div class="text-left ma-1 mb-12">
+          <v-btn
+            color="success"
+            class="white--text mx-3 ml-0"
+            style="width: 40%"
+            rounded
+          >
             Get started
           </v-btn>
-          <v-btn color="indigo" class="white--text" rounded>
+          <v-btn color="indigo" class="white--text" style="width: 40%" rounded>
             <v-icon>mdi-play-circle</v-icon>Watch Video
           </v-btn>
         </div>
       </v-col>
-      <v-col lg="6" class="px-5">
-        <div class="mr-4 mt-3 center">
-          <img
-            width="100%"
-            src="../assets/juicy-web-designer-girl-making-landing-page-with-video-color-palette-and-site-blocks.gif"
-            alt=""
-          />
+      <v-col xs="4" md="6" lg="6" sm="6" class="align-item">
+        <div class="mr-4 ma-0" data-aos="fade-up">
+          <img width="100%" src="../assets/image1.png" alt="" />
         </div>
       </v-col>
     </v-row>

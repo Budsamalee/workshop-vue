@@ -8,10 +8,10 @@
           </v-btn>
         </template>
         <v-card>
-          <br />
           <v-card-title>
-            <span class="headline">New Project</span>
+            <span>New Project</span>
           </v-card-title>
+          <v-divider></v-divider>
           <v-form class="px-3 pb-5" ref="form">
             <v-card-text>
               <v-text-field
@@ -62,19 +62,18 @@
                 </v-menu>
               </v-col>
             </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                class="mr-2"
-                color="blue darken-1"
-                outlined
-                text
-                @click="dialog = false"
-                >Close</v-btn
-              >
-              <v-btn color="green" text outlined @click="submit()">Save</v-btn>
-            </v-card-actions>
           </v-form>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              class="mr-2 white--text"
+              color="blue darken-1"
+              @click="dialog = false"
+              >Close</v-btn
+            >
+            <v-btn color="green white--text" @click="submit()">Save</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
@@ -116,7 +115,11 @@ export default {
       return `${yaer}-${month.padStart(2, 0)}/${day.padStart(2, 0)}`
     },
     submit() {
-      console.log("---- submit ----")
+      if (this.$refs.form.validate()) {
+        console.log("สมบูรณ์")
+      } else {
+        console.log("* กรุณากรอกข้อมูลให้ครบ")
+      }
     },
   },
 }

@@ -13,3 +13,6 @@
   background-color: rgb(24, 20, 20);
 }
 </style>
+<script>
+export default {}
+</script>
