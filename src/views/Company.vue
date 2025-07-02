@@ -205,8 +205,8 @@
 
 <script>
 import { mask } from "vue-the-mask"
-import Navbar from "../layouts/Navbar.vue"
-import Footer from "../layouts/Footer.vue"
+import Navbar from "@/layouts/Navbar.vue"
+import Footer from "@/layouts/Footer.vue"
 import CreateCompany from "@/components/CreateCompany.vue"
 import EditCompany from "../components/EditCompany.vue"
 import CreateAdmin from "../components/CreateAdmin.vue"

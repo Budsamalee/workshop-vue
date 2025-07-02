@@ -126,8 +126,10 @@
 </template>
 
 <script>
-import Navbar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/Navbar.vue"
-import Footer from "/Users/budsamalee/vue-vuetify-demo/src/layouts/Footer.vue"
+//import Navbar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/Navbar.vue"
+import Navbar from "@/layouts/Navbar.vue"
+//import Footer from "/Users/budsamalee/vue-vuetify-demo/src/layouts/Footer.vue"
+import Footer from "@/layouts/Footer.vue"
 export default {
   components: {
     Navbar,

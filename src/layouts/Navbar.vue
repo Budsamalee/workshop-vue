@@ -8,7 +8,8 @@
 
       <v-toolbar-title class="text-uppercase ma-3">
         <!--<span class="font-weight-light"> INET | Vue Coruse </span>-->
-        <span class="font-weight-light black--text"> INET | Vue Coruse </span>
+        <!--<span class="font-weight-light black--text"> INET | Vue Coruse </span>-->
+        <span class="font-weight-light black--text"> Portfolio | Me </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu offset-y>
@@ -30,6 +31,22 @@
           </v-list-item>
         </v-list>
       </v-menu>
+      <v-btn
+        class="ma-2 fontDetail black--text"
+        text
+        @click="change_languae('en')"
+      >
+        <v-icon left> mdi-logout </v-icon>
+        <span>EN</span>
+      </v-btn>
+      <v-btn
+        class="ma-2 fontDetail black--text"
+        text
+        @click="change_languae('th')"
+      >
+        <v-icon left> mdi-logout </v-icon>
+        <span>TH</span>
+      </v-btn>
       <v-btn class="ma-2 fontDetail black--text" text @click="logout()">
         <v-icon left> mdi-logout </v-icon>
         <span>ออกจากระบบ</span>
@@ -43,12 +60,20 @@
           <v-avatar size="100" class="red lighten-2">
             <img :src="avatar" alt="" />
           </v-avatar>
-          <p class="white--text subheading mt-1 text-center">
-            Budsamalee Madjarean
+        </v-flex>
+      </v-layout>
+      <v-layout align-center>
+        <v-flex>
+          <p
+            class="white--text subheading text-left mx-4"
+            style="font-size: 16px"
+          >
+            <b>Budsamalee Madjarean</b>
           </p>
           <popup />
         </v-flex>
       </v-layout>
+      <br />
       <v-list nav dense flat class="mt-2">
         <v-list-item-group v-model="group" active-class="border">
           <v-list-item
@@ -91,6 +116,7 @@ export default {
         { icon: "mdi-tag", text: "Vuex", route: "/vuex" },
         { icon: "mdi-lan", text: "Company", route: "/company" },
         { icon: "mdi-image", text: "Media", route: "/media" },
+        { icon: "mdi-image", text: "Test", route: "/test" },
       ],
       lists: [
         { text: "แดชบอร์ด", icon: "mdi-widgets", route: "/" },
@@ -113,6 +139,16 @@ export default {
     },
   },
   methods: {
+    change_languae(language) {
+      console.log(language);
+      if (language === "th") {
+        localStorage.setItem("lang", "th")
+        this.$i18n.locale = "th"
+      } else if (language === "en") {
+        localStorage.setItem("lang", "en")
+        this.$i18n.locale = "en"
+      }
+    },
     gotoPage() {
       this.$router.push("/")
     },

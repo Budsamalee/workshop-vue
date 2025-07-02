@@ -1,15 +1,16 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import ListEmployee from "../views/ListEmployee.vue"
-import Employee_edit from "../views/Employee/employee-edit.vue"
-import Employee_create from "../views/Employee/employee-create.vue"
-import Dashboard from "../views/Dashboard.vue"
-import Projects from "../views/Projects.vue"
-import Login from "../views/Login.vue"
-import Onebinar from "../views/Onebinar.vue"
-import Vuex from "../views/Vuex.vue"
 import Company from "../views/Company.vue"
+import Dashboard from "../views/Dashboard.vue"
+import Employee_create from "../views/Employee/employee-create.vue"
+import Employee_edit from "../views/Employee/employee-edit.vue"
+import ListEmployee from "../views/ListEmployee.vue"
+import Login from "../views/Login.vue"
 import Media from "../views/Media.vue"
+import Onebinar from "../views/Onebinar.vue"
+import Projects from "../views/Projects.vue"
+import Test from "../views/test.vue"
+import Vuex from "../views/Vuex.vue"
 //import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -64,6 +65,11 @@ const routes = [
     path: "/media",
     name: "Media",
     component: Media,
+  },
+  {
+    path: "/test",
+    name: "Media",
+    component: Test,
   },
   //{
   //  path: '/about',

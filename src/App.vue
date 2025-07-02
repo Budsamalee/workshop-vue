@@ -13,6 +13,21 @@ export default {
   data: () => ({
     //
   }),
+  mounted() {
+    this.language()
+  },
+  methods: {
+    language: function () {
+      if (localStorage.getItem("lang")) {
+        this.$i18n.locale = localStorage.getItem("lang")
+        return localStorage.getItem("lang")
+      } else {
+        localStorage.setItem("lang", "th")
+        this.$i18n.locale = localStorage.getItem("lang")
+        return localStorage.getItem("lang")
+      }
+    },
+  },
 }
 </script>
 

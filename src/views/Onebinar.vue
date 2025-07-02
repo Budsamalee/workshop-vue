@@ -71,7 +71,8 @@
 
 <script>
 import { defineComponent } from "vue"
-import NavbarOnebinar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/NavbarOnebinar.vue"
+//import NavbarOnebinar from "/Users/budsamalee/vue-vuetify-demo/src/layouts/NavbarOnebinar.vue"
+import NavbarOnebinar from "@/layouts/FooterOneBinar.vue"
 import Home from "../components/Home.vue"
 import Aboute from "../components/Aboute.vue"
 import Project from "../components/Project.vue"

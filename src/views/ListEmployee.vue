@@ -9,9 +9,16 @@
               <v-avatar color="grey">
                 <v-icon dark>mdi-account</v-icon>
               </v-avatar>
-              <b>&nbsp;ข้อมูลพนักงาน</b>
+              <!--<b>&nbsp;ข้อมูลพนักงาน</b>-->
+              <b>&nbsp; {{ $t("landingpagetoolbar.home") }}</b>
             </v-card-title>
           </v-card>
+          <vue-recaptcha
+            ref="recaptcha"
+            @verify="onCaptchaVerified"
+            @expired="onCaptchaExpired"
+            sitekey="YOUR_RECAPTCHA_SITEKEY"
+          ></vue-recaptcha>
         </v-flex>
         <v-flex xs6 lg6>
           <div>
@@ -40,7 +47,9 @@
             <v-data-table
               :headers="headers"
               :items="customers"
+              :loading="loading"
               class="fontHeader elevation-0 text-center mt-4 black--text"
+              @update:options="loadItems"
             >
               <template v-slot:item.avatar="{ item }">
                 <v-avatar class="avatarImg">
@@ -109,13 +118,15 @@
     <Footer></Footer>
   </div>
 </template>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
 <script>
-import { mapGetters, mapState } from "vuex"
-import swal from "sweetalert"
-import Navbar from "../layouts/Navbar.vue"
-import Footer from "../layouts/Footer.vue"
-import { mapActions } from "vuex"
+import { mapGetters, mapState } from "vuex";
+import swal from "sweetalert";
+import Navbar from "../layouts/Navbar.vue";
+import Footer from "../layouts/Footer.vue";
+import { mapActions } from "vuex";
+//import liff from "@line/liff";
 //import FormDetail from "../components/FormDetail.vue"
 
 export default {
@@ -138,17 +149,78 @@ export default {
         { text: "ชื่อเล่น", value: "username", align: "center" },
         { text: "Action", value: "action", align: "center" },
       ],
-      customers: [],
+      //customers: [],
+      customers: [
+        {
+          index: 1,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 2,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 3,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 4,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 5,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 6,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+        {
+          index: 7,
+          avatar: null,
+          fname: "Jena",
+          lname: "Test",
+          username: "Banana",
+          action: "",
+        },
+      ],
+      //loading: true,
+      totalItems: 0,
+      itemsPerPage: 5,
       userLogin: [],
       token: "",
       show: false,
-    }
+    };
   },
   computed: {
     ...mapGetters(["data_profile"]),
     userProfile: {
       get() {
-        return this.data_profile
+        return this.data_profile;
       },
     },
     // ถ้าต้องการ log data ที่ mapGetters ให้ log ในคัวแปรได้เลยจะไม่สามารถ log ใน created, mounted ได้เพราะมันจะ reload เข้ามาทำ created ก่อน computed
@@ -157,50 +229,74 @@ export default {
     }),
   },
   mounted() {
-    this.getCustomers()
+    this.$liff.init(function () {
+      console.log("data");
+    });
+    this.initLine();
+    this.getCustomers();
     //this.token = localStorage.getItem("userToken")
     //this.getProfile()
   },
   methods: {
     ...mapActions(["SET_EMPLOYEE_BYID"], "index/employById"),
-
+    onCaptchaVerified(response) {
+      // Handle verification success
+      console.log("Captcha verified, response:", response);
+    },
+    onCaptchaExpired() {
+      // Handle expiration (optional)
+      console.log("Captcha expired");
+    },
+    initLine() {
+      //liff
+      //  .init({
+      //    liffId: "1234567890-AbcdEfgh", // Use own liffId
+      //  })
+      //  .then(() => {
+      //    console.log("--------");
+      //    // start to use LIFF's api
+      //  })
+      //  .catch((err) => {
+      //    console.log(err);
+      //  });
+    },
     logDataMap() {
-      this.show = true
+      this.show = true;
     },
     getCustomers() {
       this.axios.get("https://www.melivecode.com/api/users").then((res) => {
-        this.customers = res.data
-        var index = 0
+        this.customers = res.data;
+        var index = 0;
         for (var item of this.customers) {
-          index += 1
-          item["index"] = index
+          index += 1;
+          item["index"] = index;
         }
         this.customers.sort((a, b) => {
           //console.log("a", a.index, "b", b.index)
           if (a.id < b.id) {
-            return 1
+            return 1;
           } else if (b.index < a.index) {
-            return -1
+            return -1;
           } else {
-            return 0
+            return 0;
           }
           //or
           // this.teams.sort((a, b) =>
           //  a.index < b.index ? 1 : b.index < a.index ? -1 : 0
           //)
-        })
-        console.log("====>", this.customers)
-      })
+        });
+        console.log("====>", this.customers);
+      });
     },
     createEmployee() {
       //console.log("---- Create Employee -----")
-      this.$router.push({ path: "/manage/createemployee" })
+      this.$router.push({ path: "/manage/createemployee" });
     },
     updateEmployee(item) {
       //console.log("item ---->", item)
-      this.id = item
-      this.SET_EMPLOYEE_BYID(item)
-      this.$router.push({ path: "/manage/editemployee" })
+      this.id = item;
+      this.SET_EMPLOYEE_BYID(item);
+      this.$router.push({ path: "/manage/editemployee" });
     },
     deleteEmployee(id) {
       swal({
@@ -210,45 +306,45 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          console.log(id)
+          console.log(id);
           var payload = {
             id: id,
-          }
-          console.log(payload)
+          };
+          console.log(payload);
           this.axios
             .delete("https://www.mecallapi.com/api/users/delete", {
               data: payload,
             })
             .then((res) => {
-              console.log("RES ->", res.data)
-              this.getCustomers()
-            })
+              console.log("RES ->", res.data);
+              this.getCustomers();
+            });
           swal("ลบสำเร็จแล้ว", {
             icon: "success",
-          })
+          });
         }
-      })
+      });
     },
     getProfile() {
       if (this.token === null || this.token === "") {
-        this.$router.push("/")
+        this.$router.push("/");
       }
       //this.getUserLogin()
     },
     getUserLogin() {
-      console.log("Token ->", this.token)
+      console.log("Token ->", this.token);
       this.axios
         .get("https://www.melivecode.com/api/auth/user", {
           headers: { Authorization: `Basic ${this.token}` },
         })
         .then((res) => {
-          this.userLogin = res.data.user
-          this.$store.dispatch("SET_PROFILE", this.userLogin)
+          this.userLogin = res.data.user;
+          this.$store.dispatch("SET_PROFILE", this.userLogin);
           //console.log("---->", this.userLogin)
-        })
+        });
     },
   },
-}
+};
 </script>
 
 <style scoped>
